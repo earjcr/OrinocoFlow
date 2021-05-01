@@ -2,9 +2,10 @@
 makeRequest = () => {
     return new Promise((resolve, reject) => {
         let apiRequest = new XMLHttpRequest();
-        apiRequest.open('GET', 'http://localhost:3000/api/camera/;');
+        apiRequest.open('GET', 'http://localhost:3000/api/teddies/;');
         apiRequest.send();
         apiRequest.onreadystatechange = () => {
+            console.apiRequest.readyState
             if (apiRequest.readyState === 4) {
                 if (apiRequest.status === 200) {
                     // Response received AND successful
