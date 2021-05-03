@@ -37,15 +37,52 @@
     </header>
     <main class="container">
       <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="card border border-success shadow-0 mb-3" style="background-color: aliceblue">
-            <img src="images/teddy_1.jpg" alt="teddy picture 1" width="auto" height="500px" max-height="500px">
+        <form>
+          <h1 class="pt-2 pb-2">Billing Address</h1>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="inputFirstName">First Name</label>
+              <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="form-group col">
+              <label for="inputLastName">Last Name</label>
+              <input type="text" class="form-control" placeholder="Last name">
+            </div>
           </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
+          <div class="form-group">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Address 2</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+          </div>
+        </form>
+        <div>
           <div class="card border border-success shadow-0 mb-3" style="background-color: aliceblue">
             <div class="card-body">
-              <h3 class="card-title text-left">Card 1 title</h3>
+              <h3 class="card-title text-left">Billing Address</h3>
               <p class="card-text text-left">Some text to build on the card title and make up the card's content.</p>
               <p class="card-text text-left" id="cost-2" weight="heavy">$0.00</p>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -60,6 +97,7 @@
             </div>
           </div>
         </div>
+        <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
       </div>
     </main>
     <footer class="bg-success">
