@@ -36,9 +36,9 @@
       </div>
     </header>
     <main class="container">
-      <div class="row">
-        <form>
-          <h1 class="pt-2 pb-2">Billing Address</h1>
+      <div class="row pt-2 pb-2">
+        <form class="col-12 col-md-6 pr-2">
+          <h1>Billing Address</h1>
           <div class="form-row">
             <div class="form-group col">
               <label for="inputFirstName">First Name</label>
@@ -79,26 +79,41 @@
             </div>
           </div>
         </form>
-        <div>
-          <div class="card border border-success shadow-0 mb-3" style="background-color: aliceblue">
-            <div class="card-body">
-              <h3 class="card-title text-left">Billing Address</h3>
-              <p class="card-text text-left">Some text to build on the card title and make up the card's content.</p>
-              <p class="card-text text-left" id="cost-2" weight="heavy">$0.00</p>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-success active mt-3">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked>Color 1</label>
-                <label class="btn btn-success mt-3">
-                  <input type="radio" name="options" id="option2" autocomplete="off">Color 2</label>
-                <label class="btn btn-success mt-3">
-                  <input type="radio" name="options" id="option3" autocomplete="off">Color 3</label>
-              </div>
-              <a class="btn btn-primary mt-3" href="cart.html" role="button">Add to Cart</a>
+        <article class="col-12 col-md-6 pl-2">
+          <!-- CART LABELS -->
+          <h1>Cart Contents</h1>
+          <div class="form-row">
+            <div class="form-group col-4">Product</div>
+            <div class="form-group col-2">Price</div>
+            <div class="form-group col-3">Quantity</div>
+            <div class="form-group col-2">Cost</div>
+            <div class="form-group col-1">Remove</div>
+          </div>
+          <!-- CART CONTENTS -->
+          <div class="form-row">
+            <div class="form-group col-4" id="cart-productbears"></div>
+            <div class="form-group col-2" id="cart-price"></div>
+            <div class="btn-group-sm col-3" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-light btn btn-outline-dark">+</button>
+              <button type="button" class="btn" id="cart-quantity">0</button>
+              <button type="button" class="btn btn-light btn btn-outline-dark">-</button>
+            </div>
+            <div class="form-group col-2" id="cart-cost">$0.00</div>
+            <div class="form-group col-1" id="cart-remove">
+              <button type="button" class="btn btn-danger btn-sm">X</button>
             </div>
           </div>
-        </div>
-        <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
+          <!-- CART TOTALS -->
+          <div class="form-row">
+            <div class="form-group col-4">Purchase Total</div>
+            <div class="form-group col-2"></div>
+            <div class="form-group col-3" id="cart-quantity-total">-</div>
+            <div class="form-group col-2" id="cart-cost-total">$0.00</div>
+            <div class="form-group col-1"></div>
+          </div>
+        </article>
       </div>
+      <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
     </main>
     <footer class="bg-success">
       <div class="container">
