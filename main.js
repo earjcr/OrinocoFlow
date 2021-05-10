@@ -2,10 +2,10 @@
 makeRequest = () => {
     return new Promise((resolve, reject) => {
         let apiRequest = new XMLHttpRequest();
-        apiRequest.open('GET', 'http://localhost:3000/api/teddies/;');
+        apiRequest.open('GET', 'http://localhost:3000/api/teddies/');
         apiRequest.send();
         apiRequest.onreadystatechange = () => {
-            console.apiRequest.readyState
+
             if (apiRequest.readyState === 4) {
                 if (apiRequest.status === 200) {
                     // Response received AND successful
@@ -16,13 +16,11 @@ makeRequest = () => {
                 }
             }
         }
-
     });
 }
 
-
 createCard = (response) => {
-    const main = document.querySelector('main');
+    const section = document.querySelector('section');
     for (let i in response) {
         // Elements of the card
         const card = document.createElement('Article');
@@ -31,11 +29,11 @@ createCard = (response) => {
         const newA = document.createElement('a');
 
         // Bootstrap 4 classes and attributes
-        card.classList.add('col-12', 'col-sm-6', 'card', 'p-3', 'm-0');
+        card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
         // id querystring
         newA.setAttribute('href', 'item.html?id=' + response[i]._id);
-        newA.textContent = 'View More Details';
-        new.Img.classList.add('img');
+        newA.textContent = 'Take a closer look';
+        newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('src', img);
 
@@ -47,7 +45,7 @@ createCard = (response) => {
         // Add new card elements
         card.appendChild(newImg);
         card.appendChild(newA);
-        main.appendChild(card);
+        section.appendChild(card);
     }
 }
 
@@ -60,19 +58,14 @@ init = async () => {
         createCard(response);
     }   catch (error) {
         // Failed request
-        document.querySelector('main').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
+        document.querySelector('section').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
     }
 }
 
 init();
 
-
-
-
-
-
 // Get DOM elements
-//const generateButton = document.getElementById('generate-button');
-//const postTitle = document.getElementById('post-title');
-//const postId = document.getElementById('post-id');
-//const postContent = document.getElementById('post-content');
+// const generateButton = document.getElementById('generate-button');
+// const postTitle = document.getElementById('post-title');
+// const postId = document.getElementById('post-id');
+// const postContent = document.getElementById('post-content');

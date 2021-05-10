@@ -5,3 +5,7 @@
 .pic1 .pic2 .pic3 .pic4 .pic5 .picpicked {
     overflow: hidden;
 }
+
+.text-responsive {
+    font-size: calc(100% + 1vw + 1vh);
+  }

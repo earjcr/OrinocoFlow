@@ -36,9 +36,9 @@
       </div>
     </header>
     <main class="container">
-      <div class="row pt-2 pb-2">
-        <form class="col-12 col-md-6 pr-2">
-          <h1>Billing Address</h1>
+      <div class="row pt-5 pb-5">
+        <form class="col-12 col-md-6 pr-10 text-responsive">
+          <h1>Billing Info</h1>
           <div class="form-row">
             <div class="form-group col">
               <label for="inputFirstName">First Name</label>
@@ -79,41 +79,31 @@
             </div>
           </div>
         </form>
-        <article class="col-12 col-md-6 pl-2">
+        <article class="col-12 col-md-6 pl-10 border border-success text-responsive">
           <!-- CART LABELS -->
           <h1>Cart Contents</h1>
           <div class="form-row">
-            <div class="form-group col-4">Product</div>
-            <div class="form-group col-2">Price</div>
-            <div class="form-group col-3">Quantity</div>
-            <div class="form-group col-2">Cost</div>
-            <div class="form-group col-1">Remove</div>
+            <div class="form-group col-6">Product</div>
+            <div class="form-group col-3">Price</div>
+            <div class="form-group col-3"></div>
           </div>
           <!-- CART CONTENTS -->
-          <div class="form-row">
-            <div class="form-group col-4" id="cart-productbears"></div>
-            <div class="form-group col-2" id="cart-price"></div>
-            <div class="btn-group-sm col-3" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-light btn btn-outline-dark">+</button>
-              <button type="button" class="btn" id="cart-quantity">0</button>
-              <button type="button" class="btn btn-light btn btn-outline-dark">-</button>
-            </div>
-            <div class="form-group col-2" id="cart-cost">$0.00</div>
-            <div class="form-group col-1" id="cart-remove">
-              <button type="button" class="btn btn-danger btn-sm">X</button>
+          <div class="form-row bg-light">
+            <div class="form-group col-6" id="cart-productbears"></div>
+            <div class="form-group col-3" id="cart-price"></div>
+            <div class="form-group col-3" id="cart-remove">
+              <button type="button" class="btn btn-danger">Remove</button>
             </div>
           </div>
           <!-- CART TOTALS -->
           <div class="form-row">
-            <div class="form-group col-4">Purchase Total</div>
-            <div class="form-group col-2"></div>
-            <div class="form-group col-3" id="cart-quantity-total">-</div>
-            <div class="form-group col-2" id="cart-cost-total">$0.00</div>
-            <div class="form-group col-1"></div>
+            <div class="form-group col-6">Purchase Total</div>
+            <div class="form-group col-3"></div>
+            <div class="form-group col-3"></div>
           </div>
+          <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
         </article>
       </div>
-      <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
     </main>
     <footer class="bg-success">
       <div class="container">
@@ -121,8 +111,6 @@
           <div class="col">
             <ul class="list-inline text-center font-weight-bold text-white">
               <li class="list-inline-item"><a href="#" class="text-white">About Us</a></li>
-              <li class="list-inline-item">&middot;</li>
-              <li class="list-inline-item"><a href="#" class="text-white">Privacy</a></li>
               <li class="list-inline-item">&middot;</li>
               <li class="list-inline-item"><a href="#" class="text-white">Terms of Use</a></li>
             </ul>
