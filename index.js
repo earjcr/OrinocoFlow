@@ -24,26 +24,28 @@ createCard = (response) => {
     for (let i in response) {
         // Elements of the card
         const card = document.createElement('section');
-        const newA = document.createElement('button');
+        const newBtn = document.createElement('a');
         const img = response[i].imageUrl;
         const newImg = document.createElement('IMG');
 
         // Format the card and its elements
         card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
-        newA.setAttribute('href', 'item.html?id=' + response[i]._id);
-        newA.classList.add('text-center')
+        newBtn.setAttribute('href', 'item.html?id=' + response[i]._id);
+        newBtn.classList.add('btn')
+        //newBtn.onclick.add('sessionStorage.item = ',i)
+        newBtn.classList.add('text-center')
         newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('src', img);
 
         // Add name, description, and price to element "a"
-        newA.innerHTML += '<h2>' + response[i].name + '</h2>';
-        newA.innerHTML += '<p>' + response[i].description + '</p>';
-        newA.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
+        newBtn.innerHTML += '<h2>' + response[i].name + '</h2>';
+        newBtn.innerHTML += '<p>' + response[i].description + '</p>';
+        newBtn.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
 
         // Make card clickable and append card elements
-        newA.appendChild(newImg);
-        card.appendChild(newA);
+        newBtn.appendChild(newImg);
+        card.appendChild(newBtn);
         section.appendChild(card);
     }
 }
