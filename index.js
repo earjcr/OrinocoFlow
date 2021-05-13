@@ -23,27 +23,26 @@ createCard = (response) => {
     const section = document.querySelector('section');
     for (let i in response) {
         // Elements of the card
-        const card = document.createElement('Article');
+        const card = document.createElement('section');
+        const newA = document.createElement('button');
         const img = response[i].imageUrl;
         const newImg = document.createElement('IMG');
-        const newA = document.createElement('a');
 
-        // Bootstrap 4 classes and attributes
+        // Format the card and its elements
         card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
-        // id querystring
         newA.setAttribute('href', 'item.html?id=' + response[i]._id);
-        newA.textContent = 'Take a closer look';
+        newA.classList.add('text-center')
         newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('src', img);
 
-        // Descriptions
-        card.innerHTML += '<h2>' + response[i].name + '</h2>';
-        card.innerHTML += '<p>' + response[i].description + '</p>';
-        card.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
+        // Add name, description, and price to element "a"
+        newA.innerHTML += '<h2>' + response[i].name + '</h2>';
+        newA.innerHTML += '<p>' + response[i].description + '</p>';
+        newA.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
 
-        // Add new card elements
-        card.appendChild(newImg);
+        // Make card clickable and append card elements
+        newA.appendChild(newImg);
         card.appendChild(newA);
         section.appendChild(card);
     }
