@@ -21,7 +21,10 @@ makeRequest = () => {
 
 createCard = (response) => {
     const section = document.querySelector('section');
-    for (let i in response) {
+        // Get saved data from sessionStorage
+        let i = sessionStorage.getItem('choice');
+        //for (let i in response) {
+        
         // Elements of the card
         const card = document.createElement('section');
         const newBtn = document.createElement('a');
@@ -29,31 +32,27 @@ createCard = (response) => {
         const newImg = document.createElement('IMG');
 
         // Format the card and its elements
-        card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
-        newBtn.setAttribute('href', 'item.html'); //?id=' + response[i]._id); removed in favor of session storage
+        card.classList.add('col-12', 'col-md-6', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
+        //newBtn.setAttribute('href', 'cart.html');
         newBtn.classList.add('btn')
-        //newBtn.onclick.add('sessionStorage.item = ',i)
         newBtn.classList.add('text-center')
         newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('src', img);
 
-        // Add name, description, and price to element "a"
+        // Add name, description, and price to cardn
         newBtn.innerHTML += '<h2>' + response[i].name + '</h2>';
         newBtn.innerHTML += '<p>' + response[i].description + '</p>';
         newBtn.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
 
         // Save data to sessionStorage
-        newBtn.addEventListener('click', () => {
-            sessionStorage.setItem('choice', i);
-    });
-
+        //newBtn.addEventListener('click', () => {
+        //    sessionStorage.setItem('choice', i);
+    
         // Make card clickable and append card elements
         newBtn.appendChild(newImg);
         card.appendChild(newBtn);
-        section.appendChild(card);
-
-    }
+        section.appendChild(card);  
 }
 
 init = async () => {
