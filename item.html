@@ -44,19 +44,14 @@
         </section>
         <div class="col-12 col-md-6">
           <div class="card border border-success shadow-0 mb-3" style="background-color: aliceblue">
-            <div class="card-body">
-              <h3 class="card-title text-left">Card 1 title</h3>
-              <p class="card-text text-left">Some text to build on the card title and make up the card's content.</p>
-              <p class="card-text text-left" id="cost-2" weight="heavy">$0.00</p>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-success active mt-3">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked>Color 1</label>
-                <label class="btn btn-success mt-3">
-                  <input type="radio" name="options" id="option2" autocomplete="off">Color 2</label>
-                <label class="btn btn-success mt-3">
-                  <input type="radio" name="options" id="option3" autocomplete="off">Color 3</label>
-              </div>
-              <a class="btn btn-primary mt-3" href="cart.html" role="button">Add to Cart</a>
+            <div class="card-body text-center">
+              <h3 class="card-title">Choose your color</h3>
+              <!-- BUTTONS ARE CREATED IN JAVASCRIPT FOR # OF COLOR OPTIONS -->
+              <div id="btnColors"></div>
+              <br>
+              <p class="card-text" id="costItem" weight="heavy"></p>
+              <p class="card-text">You can adjust your quantity in the cart</p>
+              <a class="btn btn-primary mt-3" id="addItem" href="cart.html" role="button">Choose the Color of your Bear</a>
             </div>
           </div>
         </div>

@@ -32,7 +32,6 @@ createCard = (response) => {
         card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
         newBtn.setAttribute('href', 'item.html'); //?id=' + response[i]._id); removed in favor of session storage
         newBtn.classList.add('btn')
-        //newBtn.onclick.add('sessionStorage.item = ',i)
         newBtn.classList.add('text-center')
         newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
@@ -46,7 +45,7 @@ createCard = (response) => {
         // Save data to sessionStorage
         newBtn.addEventListener('click', () => {
             sessionStorage.setItem('choice', i);
-    });
+        });
 
         // Make card clickable and append card elements
         newBtn.appendChild(newImg);
