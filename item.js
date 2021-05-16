@@ -23,12 +23,14 @@ makeRequest = () => {
     });
 }
 
+sessionStorage.setItem('colorChosen', false);
+
 createCard = (response) => {
     const section = document.querySelector('section');
         // Get choice of bear from sessionStorage
         let i = sessionStorage.getItem('choice');
         
-        // First Card Elements showing the chosen bear
+        // First Card Elements showing the chosen bear - just the image
         const card = document.createElement('section');
             const newBtn = document.createElement('a');
             const img = response[i].imageUrl;
@@ -42,23 +44,21 @@ createCard = (response) => {
             newImg.setAttribute('width', '100%');
             newImg.setAttribute('src', img);
 
-            // Add name, description, and price to cardn
-            newBtn.innerHTML += '<h2>' + response[i].name + '</h2>';
-            newBtn.innerHTML += '<p>' + response[i].description + '</p>';
-            newBtn.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
-
             // Append card elements
             newBtn.appendChild(newImg);
             card.appendChild(newBtn);
             section.appendChild(card); 
 
         // Second Card Elements asking color choice & quantity
-        const costItem = document.getElementById('costItem');
-        costItem.textContent = 'The ' + response[i].name + ' bear costs $' + response[i].price / 100;
-
-        const addItem = document.getElementById('addItem');
-        const btnColors = document.getElementById('btnColors');
-        const colors = response[i].colors;
+            const bearName = document.getElementById('bearName');
+                bearName.textContent = response[i].name
+            const bearDescription = document.getElementById('bearDescription');
+                bearDescription.textContent = response[i].description
+            const costItem = document.getElementById('costItem');
+                costItem.textContent = 'The price for ' + response[i].name + ' is $' + response[i].price / 100;
+            const addItem = document.getElementById('addItem');
+            const btnColors = document.getElementById('btnColors');
+            const colors = response[i].colors;
 
             for (let j in colors) {
                 const newColorButton = document.createElement('button');
@@ -66,13 +66,19 @@ createCard = (response) => {
                 // Format the card and its elements
                 newColorButton.classList.add('btn');
                 newColorButton.classList.add('btn-outline-dark');
+                newColorButton.classList.add('btn-sm');
                 newColorButton.classList.add('mt-3');
                 newColorButton.textContent = (colors[j]);
 
                 newColorButton.addEventListener('click', () => {
                     sessionStorage.setItem('colorChoice', j);
                     addItem.textContent = 'Add ' + colors[j] + ' ' + response[i].name + ' bear to the cart?'
-                })
+                    if (sessionStorage.getItem('colorChosen')) {
+                        addItem.setAttribute('href', 'cart.html');   
+                    };
+                    sessionStorage.setItem('colorChosen', true);
+
+                });
 
                 btnColors.appendChild(newColorButton);
 
