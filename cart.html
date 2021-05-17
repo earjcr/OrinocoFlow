@@ -13,7 +13,7 @@
         <div class="row">
           <nav class="col navbar navbar-expand-lg navbar-dark justify-content-center">
             <a class="navbar-brand" href="index.html">
-              <img src="images/OrinocoLogo.png" width="351px" height="82px" alt="Orinoco Logo" />
+              <img src="images/OrinocoLogo.png" class="img-fluid" width="351px" height="82px" alt="Orinoco Logo" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
               <span class="navbar-toggler-icon"></span>
@@ -37,6 +37,30 @@
     </header>
     <main class="container">
       <div class="row pt-5 pb-5">
+        <article class="col-12 col-md-6 pl-10 border border-success text-responsive">
+          <!-- CART LABELS -->
+          <h1>Cart Contents</h1>
+          <div class="form-row">
+            <div class="form-group col-6">Product</div>
+            <div class="form-group col-3">Price</div>
+            <div class="form-group col-3"></div>
+          </div>
+          <!-- CART CONTENTS -->
+          <div class="form-row bg-light">
+            <div class="form-group col-6" id="cart-productbears"></div>
+            <div class="form-group col-3" id="cart-price"></div>
+            <div class="form-group col-3" id="cart-remove">
+              <button type="button" class="btn btn-danger">X</button>
+            </div>
+          </div>
+          <!-- CART TOTALS -->
+          <div class="form-row">
+            <div class="form-group col-6">Purchase Total</div>
+            <div class="form-group col-3"></div>
+            <div class="form-group col-3"></div>
+          </div>
+          <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
+        </article>
         <form class="col-12 col-md-6 pr-10 text-responsive">
           <h1>Billing Info</h1>
           <div class="form-row">
@@ -66,43 +90,12 @@
               <label for="inputCity">City</label>
               <input type="text" class="form-control" id="inputCity">
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputState">State</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="form-group col-md-2">
-              <label for="inputZip">Zip</label>
+            <div class="form-group col-md-6">
+              <label for="inputZip">Postal Code</label>
               <input type="text" class="form-control" id="inputZip">
             </div>
           </div>
         </form>
-        <article class="col-12 col-md-6 pl-10 border border-success text-responsive">
-          <!-- CART LABELS -->
-          <h1>Cart Contents</h1>
-          <div class="form-row">
-            <div class="form-group col-6">Product</div>
-            <div class="form-group col-3">Price</div>
-            <div class="form-group col-3"></div>
-          </div>
-          <!-- CART CONTENTS -->
-          <div class="form-row bg-light">
-            <div class="form-group col-6" id="cart-productbears"></div>
-            <div class="form-group col-3" id="cart-price"></div>
-            <div class="form-group col-3" id="cart-remove">
-              <button type="button" class="btn btn-danger">Remove</button>
-            </div>
-          </div>
-          <!-- CART TOTALS -->
-          <div class="form-row">
-            <div class="form-group col-6">Purchase Total</div>
-            <div class="form-group col-3"></div>
-            <div class="form-group col-3"></div>
-          </div>
-          <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
-        </article>
       </div>
     </main>
     <footer class="bg-success">

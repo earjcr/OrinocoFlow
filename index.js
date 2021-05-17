@@ -5,13 +5,12 @@ makeRequest = () => {
         apiRequest.open('GET', 'http://localhost:3000/api/teddies/');
         apiRequest.send();
         apiRequest.onreadystatechange = () => {
-
             if (apiRequest.readyState === 4) {
                 if (apiRequest.status === 200) {
-                    // Response received AND successful
+                    // Successful response
                     resolve(JSON.parse(apiRequest.response));
                 } else {
-                    // Unsuccessful
+                    // Unsuccessful response
                     reject('Server is down!');
                 }
             }
@@ -40,11 +39,15 @@ createCard = (response) => {
         // Add name, description, and price to element "a"
         newBtn.innerHTML += '<h2>' + response[i].name + '</h2>';
         newBtn.innerHTML += '<p>' + response[i].description + '</p>';
-        newBtn.innerHTML += '<p>' + '$' + response[i].price / 100 + '</p>';
+        newBtn.innerHTML += '<p>$' + response[i].price / 100 + '</p>';
 
-        // Save data to sessionStorage
+        // Save data to sessionStorage, but image will need to be accessed in item.js
         newBtn.addEventListener('click', () => {
             sessionStorage.setItem('choice', i);
+            sessionStorage.setItem('choiceName', response[i].name);
+            sessionStorage.setItem('choiceDescription', response[i].description);
+            sessionStorage.setItem('choicePrice',  response[i].price);
+            sessionStorage.setItem('choiceId', response[i].price);
         });
 
         // Make card clickable and append card elements
