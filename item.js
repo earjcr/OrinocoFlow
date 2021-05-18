@@ -2,11 +2,9 @@
 // THE CODE WAS ALTERED SLIGHTLY TO MAKE FUTURE EDITS EASIER
 // THE CHOICE OF BEAR IS IN sessionStorage
 
-sessionStorage.getItem('choice');
-let choiceName        = sessionStorage.getItem('choiceName');
-let choiceDescription = sessionStorage.getItem('choiceDescription');
-let choicePrice       = sessionStorage.getItem('choicePrice');
-let choiceId          = sessionStorage.getItem('choiceId');
+sessionStorage.setItem('colorChosen', false);
+const choiceId = sessionStorage.getItem('choiceId');
+const i = sessionStorage.getItem('choice');
 
 // API import function
 makeRequest = () => {
@@ -29,19 +27,18 @@ makeRequest = () => {
     });
 }
 
-sessionStorage.setItem('colorChosen', false);
-if (!sessionStorage['cartName']) {
-    sessionStorage['cartName', '[]']
-}
+
 createCard = (response) => {
     const section = document.querySelector('section');
         // Get choice of bear from sessionStorage
-        let i = sessionStorage.getItem('choice');
-        
+        let choiceName        = response.name;
+        let choiceDescription = response.description;
+        let choicePrice       = response.price;
+                
         // First Card Elements showing the chosen bear - just the image
-        const card = document.createElement('section');
-            const newBtn = document.createElement('a');
+            const card = document.createElement('section');
             const img = response.imageUrl;
+            const newBtn = document.createElement('a');
             const newImg = document.createElement('IMG');
 
             // Format the card and its elements
@@ -80,13 +77,13 @@ createCard = (response) => {
                 newColorButton.textContent = choiceColor;
 
                 newColorButton.addEventListener('click', () => {
-                    sessionStorage.setItem('colorChoice', j);
+                    sessionStorage.setItem('choiceColor', choiceColor);
                     addItem.textContent = 'Add ' + choiceColor + ' ' + choiceName + ' bear to the cart?'
                     if (sessionStorage.getItem('colorChosen')) {
                         addItem.setAttribute('href', 'cart.html');   
                     };
                     sessionStorage.setItem('colorChosen', true);
-                        let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + currentPrice + '}';
+                    let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + currentPrice + '}';
                     // sessionStorage.setItem('cart', {"colors":["Tan","Chocolate","Black","White"],"_id":"5be9c8541c9d440000665243","name":"Norbert"       ,"price":2900,
 
                 });

@@ -29,9 +29,9 @@ createCard = (response) => {
 
         // Format the card and its elements
         card.classList.add('col-12', 'col-md-6', 'col-lg-4', 'card', 'p-2', 'mb-1', 'border', 'border-success', 'shadow-0');
-        newBtn.setAttribute('href', 'item.html'); //?id=' + response[i]._id); removed in favor of session storage
         newBtn.classList.add('btn')
         newBtn.classList.add('text-center')
+        newBtn.setAttribute('href', 'item.html');
         newImg.classList.add('img');
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('src', img);
@@ -44,10 +44,9 @@ createCard = (response) => {
         // Save data to sessionStorage, but image will need to be accessed in item.js
         newBtn.addEventListener('click', () => {
             sessionStorage.setItem('choice', i);
-            sessionStorage.setItem('choiceName', response[i].name);
-            sessionStorage.setItem('choiceDescription', response[i].description);
+            sessionStorage.setItem('choiceName' , response[i].name);
             sessionStorage.setItem('choicePrice', response[i].price);
-            sessionStorage.setItem('choiceId', response[i]._id);
+            sessionStorage.setItem('choiceId'   , response[i]._id);
         });
 
         // Make card clickable and append card elements

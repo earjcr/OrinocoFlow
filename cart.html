@@ -21,10 +21,10 @@
             <div id="navbarContent" class="collapse navbar-collapse">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.html">Continue Shopping</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="item.html"></a>
+                  <a class="nav-link" href="item.html">Back to Color Choice</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="cart.html">Cart</a>
@@ -40,18 +40,19 @@
         <article class="col-12 col-md-6 pl-10 border border-success text-responsive">
           <!-- CART LABELS -->
           <h1>Cart Contents</h1>
-          <div class="form-row">
-            <div class="form-group col-6">Product</div>
-            <div class="form-group col-3">Price</div>
-            <div class="form-group col-3"></div>
-          </div>
-          <!-- CART CONTENTS -->
-          <div class="form-row bg-light">
-            <div class="form-group col-6" id="cart-productbears"></div>
-            <div class="form-group col-3" id="cart-price"></div>
-            <div class="form-group col-3" id="cart-remove">
-              <button type="button" class="btn btn-danger">X</button>
-            </div>
+          <div class="row">
+            <ul class="col-6 col-md-3">
+              <li>Bear</li>
+              <li class="list-inline-item" id="addName"></li>
+            </ul>
+            <ul class="form-group col-3 col-md-2">
+              <li>Price</li>
+              <li class="list-inline-item" id="addPrice"></li>
+            </ul>
+            <ul class="form-group col-3 col-md-1">
+              <li>Remove</li>
+              <button type="button" id="deleteItem" class="btn btn-danger list-inline">X</button>
+            </ul>
           </div>
           <!-- CART TOTALS -->
           <div class="form-row">
@@ -59,7 +60,6 @@
             <div class="form-group col-3"></div>
             <div class="form-group col-3"></div>
           </div>
-          <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
         </article>
         <form class="col-12 col-md-6 pr-10 text-responsive">
           <h1>Billing Info</h1>
@@ -96,6 +96,7 @@
             </div>
           </div>
         </form>
+        <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
       </div>
     </main>
     <footer class="bg-success">
