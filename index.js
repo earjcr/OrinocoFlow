@@ -46,8 +46,8 @@ createCard = (response) => {
             sessionStorage.setItem('choice', i);
             sessionStorage.setItem('choiceName', response[i].name);
             sessionStorage.setItem('choiceDescription', response[i].description);
-            sessionStorage.setItem('choicePrice',  response[i].price);
-            sessionStorage.setItem('choiceId', response[i].price);
+            sessionStorage.setItem('choicePrice', response[i].price);
+            sessionStorage.setItem('choiceId', response[i]._id);
         });
 
         // Make card clickable and append card elements

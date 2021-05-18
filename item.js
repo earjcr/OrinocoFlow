@@ -2,11 +2,17 @@
 // THE CODE WAS ALTERED SLIGHTLY TO MAKE FUTURE EDITS EASIER
 // THE CHOICE OF BEAR IS IN sessionStorage
 
+sessionStorage.getItem('choice');
+let choiceName        = sessionStorage.getItem('choiceName');
+let choiceDescription = sessionStorage.getItem('choiceDescription');
+let choicePrice       = sessionStorage.getItem('choicePrice');
+let choiceId          = sessionStorage.getItem('choiceId');
+
 // API import function
 makeRequest = () => {
     return new Promise((resolve, reject) => {
         let apiRequest = new XMLHttpRequest();
-        apiRequest.open('GET', 'http://localhost:3000/api/teddies/');
+        apiRequest.open('GET', 'http://localhost:3000/api/teddies/' + choiceId);
         apiRequest.send();
         apiRequest.onreadystatechange = () => {
 
@@ -27,12 +33,6 @@ sessionStorage.setItem('colorChosen', false);
 if (!sessionStorage['cartName']) {
     sessionStorage['cartName', '[]']
 }
-sessionStorage.getItem('choice');
-let currentName        = sessionStorage.getItem('choiceName');
-let currentDescription = sessionStorage.getItem('choiceDescription');
-let currentPrice       = sessionStorage.getItem('choicePrice');
-let currentId          = sessionStorage.getItem('choiceId');
-
 createCard = (response) => {
     const section = document.querySelector('section');
         // Get choice of bear from sessionStorage
@@ -41,7 +41,7 @@ createCard = (response) => {
         // First Card Elements showing the chosen bear - just the image
         const card = document.createElement('section');
             const newBtn = document.createElement('a');
-            const img = response[i].imageUrl;
+            const img = response.imageUrl;
             const newImg = document.createElement('IMG');
 
             // Format the card and its elements
@@ -59,34 +59,34 @@ createCard = (response) => {
 
         // Second Card Elements asking color choice
             const bearName = document.getElementById('bearName');
-                bearName.textContent = currentName;
+                bearName.textContent = choiceName;
             const bearDescription = document.getElementById('bearDescription');
-                bearDescription.textContent = currentDescription;
+                bearDescription.textContent = choiceDescription;
             const costItem = document.getElementById('costItem');
-                costItem.textContent = 'The price for ' + currentName + ' is $' + currentPrice / 100;
+                costItem.textContent = 'The price for ' + choiceName + ' is $' + choicePrice / 100;
             const addItem = document.getElementById('addItem');
             const btnColors = document.getElementById('btnColors');
-            const colors = response[i].colors;
+            const colors = response.colors;
 
             for (let j in colors) {
                 const newColorButton = document.createElement('button');
 
-                const currentColor = colors[j]; 
+                const choiceColor = colors[j]; 
                 // Format the card and its elements
                 newColorButton.classList.add('btn');
                 newColorButton.classList.add('btn-outline-dark');
                 newColorButton.classList.add('btn-sm');
                 newColorButton.classList.add('mt-3');
-                newColorButton.textContent = currentColor;
+                newColorButton.textContent = choiceColor;
 
                 newColorButton.addEventListener('click', () => {
                     sessionStorage.setItem('colorChoice', j);
-                    addItem.textContent = 'Add ' + currentColor + ' ' + currentName + ' bear to the cart?'
+                    addItem.textContent = 'Add ' + choiceColor + ' ' + choiceName + ' bear to the cart?'
                     if (sessionStorage.getItem('colorChosen')) {
                         addItem.setAttribute('href', 'cart.html');   
                     };
                     sessionStorage.setItem('colorChosen', true);
-                        let appendage = '{"name":' + currentName + '"colors":' + currentColor + ',"_id":' + currentId + ',"price":' + currentPrice + '}';
+                        let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + currentPrice + '}';
                     // sessionStorage.setItem('cart', {"colors":["Tan","Chocolate","Black","White"],"_id":"5be9c8541c9d440000665243","name":"Norbert"       ,"price":2900,
 
                 });
