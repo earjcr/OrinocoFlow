@@ -57,7 +57,7 @@
           <!-- CART TOTALS -->
           <div class="form-row">
             <div class="form-group col-6">Purchase Total</div>
-            <div class="form-group col-3"></div>
+            <div class="form-group col-3" id=totalPrice></div>
             <div class="form-group col-3"></div>
           </div>
         </article>
@@ -65,38 +65,38 @@
           <h1>Billing Info</h1>
           <div class="form-row">
             <div class="form-group col">
-              <label for="inputFirstName">First Name</label>
+              <label for="inputFirstName" id="firstName">First Name</label>
               <input type="text" class="form-control" placeholder="First name">
             </div>
-            <div class="form-group col">
+            <div class="form-group col" id="lastName">
               <label for="inputLastName">Last Name</label>
               <input type="text" class="form-control" placeholder="Last name">
             </div>
           </div>
           <div class="form-group">
-            <label for="inputEmail4">Email</label>
+            <label for="inputEmail4" id="email">Email</label>
             <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
           </div>
           <div class="form-group">
-            <label for="inputAddress">Address</label>
+            <label for="inputAddress" id="address">Address</label>
             <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
           </div>
           <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
+            <label for="inputAddress2" id="address2">Address 2</label>
             <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputCity">City</label>
+              <label for="inputCity" id="city">City</label>
               <input type="text" class="form-control" id="inputCity">
             </div>
             <div class="form-group col-md-6">
-              <label for="inputZip">Postal Code</label>
+              <label for="inputZip" id="postal">Postal Code</label>
               <input type="text" class="form-control" id="inputZip">
             </div>
           </div>
         </form>
-        <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" role="button">Continue to Checkout</a>
+        <a class="btn btn-primary btn-lg btn-block mt-3 mb-3" href="confirm.html" id="btnCheckout" role="button">Continue to Checkout</a>
       </div>
     </main>
     <footer class="bg-success">

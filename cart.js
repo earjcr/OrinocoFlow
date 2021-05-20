@@ -1,77 +1,79 @@
-// THIS FILE WAS CREATED FROM THE index.js FILE
-// THE CODE WAS ALTERED SLIGHTLY TO MAKE FUTURE EDITS EASIER
-// THE CHOICE OF BEAR IS IN sessionStorage
+// THE CHOICE OF BEAR AND COLOR IS IN sessionStorage
 
 // Reset the indicator
 sessionStorage.setItem('colorChosen', false);
 
-// Import the product data
+// Import the product data of the chosen bear
 const choiceName        = sessionStorage.getItem('choiceName');
 const choiceColor       = sessionStorage.getItem('choiceColor');
-const choiceDescription = sessionStorage.getItem('choiceDescription');
 const choicePrice       = sessionStorage.getItem('choicePrice');
 const choiceId          = sessionStorage.getItem('choiceId');
-let string = '[{'
-string = string + '"name":'   + choiceName  + ','
-string = string + '"color":'  + choiceColor + ','
-string = string + '"price":'  + choicePrice + ','
-string = string + '"_id":'    + choiceId    + '}]'
+
+// Create the stringify'd new product choice for adding to the cart 
+let string = '{'
+string = string + '"name":"'   + choiceName  + '",'
+string = string + '"color":"'  + choiceColor + '",'
+string = string + '"price":"'  + choicePrice + '",'
+string = string + '"_id":"'    + choiceId    + '"}'
 
 // Create product array if it does not yet exist, and add the choiceId to the array
 if (!sessionStorage['cartProduct']) {
     sessionStorage.setItem('cartProduct', string);
+} else {
+// NEED TO ADD THE PROGRAMMING FOR MULTIPLE ITEMS
 }
+
 // sessionStorage.setItem('cartProduct', (sessionStorage.getItem('cartProduct')) && choiceId);
 
 // Initialize the total cost
-let priceTotal = 0
+let totalPrice = 0
 
 editCart = () => {
     // First Card Elements showing the chosen bear info and cart contents
-        // Add product to Cart Contents
-        const addName = document.getElementById('addName');
-            addName.textContent = choiceName + ' - ' + choiceColor;
-        const addPrice = document.getElementById('addPrice');
-            priceTotal = priceTotal + choicePrice;
-            addPrice.textContent = choicePrice / 100;
+
+    // Add product to Cart Contents
+    const addName = document.getElementById('addName');
+        addName.textContent = choiceName + ' - ' + choiceColor;
+    const addPrice = document.getElementById('addPrice');
+        addPrice.textContent = choicePrice / 100;
+
+    // Total price will need to move for programming multiple purchase
+    const addTotal = document.getElementById('totalPrice');
+        totalPrice = totalPrice + choicePrice
+        addTotal.textContent = totalPrice / 100;
 
     // Second Card Elements asking color choice
-        // const bearName = document.getElementById('bearName');
-        //     bearName.textContent = currentName;
-        // const bearDescription = document.getElementById('bearDescription');
-        //     bearDescription.textContent = currentDescription;
-        // const costItem = document.getElementById('costItem');
-        //     costItem.textContent = 'The price for ' + currentName + ' is $' + currentPrice / 100;
-        // const addItem = document.getElementById('addItem');
-        // const btnColors = document.getElementById('btnColors');
-        // const colors = response[i].colors;
 
-        // for (let j in colors) {
-        //     const newColorButton = document.createElement('button');
+    // Get customer info after clicking checkout button
+    const btnCheckout = document.getElementById('btnCheckout')
+    btnCheckout.addEventListener('click', () => {
+        // Get the "final" customer info from the form
+        const firstName = document.getElementById('firstName')
+        const lastName  = document.getElementById('lastName' )
+        const address   = document.getElementById('address'  )
+        const address2  = document.getElementById('address2' )
+        const city      = document.getElementById('city'     )
+        const email     = document.getElementById('email'    )
+        // const postal    = document.getElementById('postal'   )
 
-        //     const currentColor = colors[j]; 
-        //     // Format the card and its elements
-        //     newColorButton.classList.add('btn');
-        //     newColorButton.classList.add('btn-outline-dark');
-        //     newColorButton.classList.add('btn-sm');
-        //     newColorButton.classList.add('mt-3');
-        //     newColorButton.textContent = currentColor;
-
-        //     newColorButton.addEventListener('click', () => {
-        //         sessionStorage.setItem('colorChoice', j);
-        //         addItem.textContent = 'Add ' + currentColor + ' ' + currentName + ' bear to the cart?'
-        //         if (sessionStorage.getItem('colorChosen')) {
-        //             addItem.setAttribute('href', 'cart.html');   
-        //         };
-        //         sessionStorage.setItem('colorChosen', true);
-        //             let appendage = '{"name":' + currentName + '"colors":' + currentColor + ',"_id":' + currentId + ',"price":' + currentPrice + '}';
-        //         // sessionStorage.setItem('cart', {"colors":["Tan","Chocolate","Black","White"],"_id":"5be9c8541c9d440000665243","name":"Norbert"       ,"price":2900,
-
-        //     });
-
-        //     btnColors.appendChild(newColorButton);
-
-        // }
+        // Create the stringify'd customer info for POSTing to the API 
+        let stringPost = '{'
+        stringPost = stringPost + '"firstName":"' + firstName + '",'
+        stringPost = stringPost + '"lastName":"'  + lastName  + '",'
+        stringPost = stringPost + '"address":"'   + address   + '",'
+        stringPost = stringPost + '"city":"'      + city      + '",'
+        stringPost = stringPost + '"email":"'     + email     + '"}'
+        stringPost = stringPost + '"products":["' + choiceId  + '"]'
+        * Expects request to contain:
+        * contact: {
+        *   firstName: string,
+        *   lastName: string,
+        *   address: string,
+        *   city: string,
+        *   email: string
+        * }
+        * products: [string] <-- array of product _id
+    })
 }
 
 // // API export function
