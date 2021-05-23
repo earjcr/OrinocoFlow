@@ -57,58 +57,62 @@ editCart = () => {
         // const postal    = document.getElementById('postal'   )
 
         // Create the stringify'd customer info for POSTing to the API 
-        let stringPost = '{'
-        stringPost = stringPost + '"firstName":"' + firstName + '",'
-        stringPost = stringPost + '"lastName":"'  + lastName  + '",'
-        stringPost = stringPost + '"address":"'   + address   + '",'
-        stringPost = stringPost + '"city":"'      + city      + '",'
-        stringPost = stringPost + '"email":"'     + email     + '"}'
-        stringPost = stringPost + '"products":["' + choiceId  + '"]'
-        * Expects request to contain:
-        * contact: {
-        *   firstName: string,
-        *   lastName: string,
-        *   address: string,
-        *   city: string,
-        *   email: string
-        * }
-        * products: [string] <-- array of product _id
+        let stringPost = '"contact":{'
+        stringPost = stringPost + '"firstName:"'  + firstName.value + '",'
+        stringPost = stringPost + '"lastName":"'  + lastName.value  + '",'
+        stringPost = stringPost + '"address":"'   + address.value   + '",'
+        stringPost = stringPost + '"city":"'      + city.value      + '",'
+        stringPost = stringPost + '"email":"'     + email.value     + '"}'
+        stringPost = stringPost + '"products":["' + choiceId        + '"]'
+        sessionStorage.setItem('stringPost', stringPost);
+
+        // * Expects request to contain:
+        let contact = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            address: address.value,
+            city: city.value,
+            email: email.value}
+        let products = choiceId;
+        const object = contact, products;
     })
 }
+editCart();
 
-// // API export function
-// makeRequest = (data) => {
-//     return new Promise((resolve, reject) => {
-//         let apiRequest = new XMLHttpRequest();
-//         apiRequest.open('POST', 'http://localhost:3000/api/teddies/order');
-//         apiRequest.setRequestHeader('Content-Type', 'application/json');
-//         apiRequest.send(JSON.stringify(data));
-//         apiRequest.onreadystatechange = () => {
-//             if (apiRequest.readyState === 4) {
-//                 if (apiRequest.status === 201) {
-//                     // Response successful
-//                     resolve(JSON.parse(apiRequest.response));
-//                 }
-//                 if (apiRequest.status === 400) {
-//                     // Unsuccessful
-//                     reject('Error - API Request unsuccessful');
-//                 }
-//             }
-//         }
-//     });
-// }
-init = () => {  //= async () => {
-    // try {
+// API export function
+makeRequest = (data) => {
+    return new Promise((resolve, reject) => {
+        let apiRequest = new XMLHttpRequest();
+        apiRequest.open('POST', 'http://localhost:3000/api/teddies/order');
+        apiRequest.setRequestHeader('Content-Type', 'application/json');
+        apiRequest.send(JSON.stringify(data));
+        apiRequest.onreadystatechange = () => {
+            if (apiRequest.readyState === 4) {
+                if (apiRequest.status === 201) {
+                    // Response successful
+                    resolve(JSON.parse(apiRequest.response));
+                }
+                if (apiRequest.status === 400) {
+                    // Unsuccessful
+                    reject('Error - API Request unsuccessful');
+                }
+            }
+        }
+    });
+}
+
+
+submit = async () => {
+    try {
         // Run makeRequest and wait for a response
-        // const requestPromise = makeRequest();
-        // const response = await requestPromise;
+        const requestPromise = makeRequest(object);
+        const response = await requestPromise;
         // Display response
-        editCart();
-    // }   catch (error) {
+
+    }   catch (error) {
         // Failed request
-        // document.querySelector('section').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
+        document.querySelector('form').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
     // }
 }
 
-init();
-
+submit();
