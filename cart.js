@@ -43,50 +43,41 @@ editCart = () => {
 
     // Total price will need to move for programming multiple purchase
     const addTotal = document.getElementById('totalPrice');
-        totalPrice = totalPrice + choicePrice
+        totalPrice = totalPrice + choicePrice;
         addTotal.textContent = totalPrice / 100;
 
     // Second card gets information for the purchasor
-    console.log('cart.js[53]')
+    console.log('cart.js[50]');
     // Get customer info after clicking checkout button
-    const btnCheckout = document.getElementById('btnCheckout')
+    const btnCheckout = document.getElementById('btnCheckout');
     btnCheckout.addEventListener('click', () => {
         // Get the "final" customer info from the form
-        const firstName = document.getElementById('firstName')
-        const lastName  = document.getElementById('lastName' )
-        const address   = document.getElementById('address'  )
-        const address2  = document.getElementById('address2' )
-        const city      = document.getElementById('city'     )
-        const email     = document.getElementById('email'    )
+        const firstName = document.getElementById('firstName');
+        const lastName  = document.getElementById('lastName' );
+        const address   = document.getElementById('address'  );
+        const address2  = document.getElementById('address2' );
+        const city      = document.getElementById('city'     );
+        const email     = document.getElementById('email'    );
         // const postal    = document.getElementById('postal'   )
-        console.log('cart.js[65]')
+        console.log('cart.js[62]');
         // Create the stringify'd customer info for POSTing to the API 
-        let stringPost = '"contact":{'
+        let stringPost = '{contact:{'
+        console.log(stringPost);
+        stringPost = stringPost + 'firstName: "Eric", ' //  + "EricfirstName.textContent + '",';
+        console.log(stringPost);
+        stringPost = stringPost + 'lastName: "Rudy", ' // + lastName.textContent  + '",';
+        console.log(stringPost);
+        stringPost = stringPost + 'address: "1108 Earl Street", ' //   + address.textContent   + '",';
+        console.log(stringPost);
+        stringPost = stringPost + 'city: "Philadelphia", ' //      + city.textContent      + '",';
+        console.log(stringPost);
+        stringPost = stringPost + 'email: "earjcr@msn.com"},' //     + email.textContent     + '"},';
         console.log(stringPost)
-        stringPost = stringPost + '"firstName:"'  + firstName.textContent + '",'
-        console.log(stringPost)
-        stringPost = stringPost + '"lastName":"'  + lastName.textContent  + '",'
-        console.log(stringPost)
-        stringPost = stringPost + '"address":"'   + address.textContent   + '",'
-        console.log(stringPost)
-        stringPost = stringPost + '"city":"'      + city.textContent      + '",'
-        console.log(stringPost)
-        stringPost = stringPost + '"email":"'     + email.textContent     + '"}'
-        console.log(stringPost)
-        stringPost = stringPost + '"products":["' + choiceId        + '"]'
+        stringPost = stringPost + 'products:  Array(1), orderId:"5beaabe91c9d440000a57d96"}' // + choiceId        + '"}]';
         console.log(stringPost)
         sessionStorage.setItem('stringPost', stringPost);
-        console.log('cart.js[74]')
-        // // * Expects request to contain:
-        // let contact = {
-        //     firstName: firstName.value,
-        //     lastName: lastName.value,
-        //     address: address.value,
-        //     city: city.value,
-        //     email: email.value}
-        // let productIds = choiceId;
-        // const object = contact
-        // object = object, productIds;
+        console.log('cart.js[79]');
+        console.log(stringPost);
         submit();
     })
 }
@@ -103,6 +94,9 @@ makeRequest = (data) => {
                 if (apiRequest.status === 201) {
                     // Response successful
                     resolve(JSON.parse(apiRequest.response));
+                     orderId = data.orderId;
+                    sessionStorage.setItem("orderId", orderId);
+                    console.log(orderId);
                 }
                 if (apiRequest.status === 400) {
                     // Unsuccessful
@@ -114,15 +108,15 @@ makeRequest = (data) => {
     });
 }
 
-// const object = sessionStorage.getItem('stringPost');
-
 editCart();
 
 submit = async () => {
     try {
         // Run makeRequest and wait for a response
+        const stringPost = sessionStorage.getItem('stringPost')
         const requestPromise = makeRequest(stringPost);
         const response = await requestPromise;
+        console.log(response)
         // Display response
 
     }   catch (error) {
