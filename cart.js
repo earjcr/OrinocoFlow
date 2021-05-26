@@ -73,7 +73,7 @@ editCart = () => {
         console.log(stringPost);
         stringPost = stringPost + 'email: "earjcr@msn.com"},' //     + email.textContent     + '"},';
         console.log(stringPost)
-        stringPost = stringPost + 'products:  Array(1), orderId:"5beaabe91c9d440000a57d96"}' // + choiceId        + '"}]';
+        stringPost = stringPost + 'products: ["5beaabe91c9d440000a57d96"]}' // + choiceId        + '"}]';
         console.log(stringPost)
         sessionStorage.setItem('stringPost', stringPost);
         console.log('cart.js[79]');
@@ -91,6 +91,7 @@ makeRequest = (data) => {
         apiRequest.send(data);
         apiRequest.onreadystatechange = () => {
             if (apiRequest.readyState === 4) {
+                console.log('cart.js[94]')
                 if (apiRequest.status === 201) {
                     // Response successful
                     resolve(JSON.parse(apiRequest.response));
