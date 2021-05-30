@@ -2,6 +2,7 @@
 
 // Reset the indicator
 sessionStorage.setItem('colorChosen', false);
+let orderId;
 
 // Import the product data of the chosen bear
 const choiceName        = sessionStorage.getItem('choiceName');
@@ -67,80 +68,37 @@ editCart = () => {
           city: city.value,
           zip: zip.value,
         }
-        let data = {
+        const data = {
           contact: contact,
           products: products,
         }
         makeRequest(data);
 
-        //submit();
+        //submit(orderObject);
     })
 }
 
 editCart();
 
-function makeRequest(data) {
-    fetch('http://localhost:3000/api/teddies/order', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    }).then((response) => {
-      return response.json();
-    }).then((data) => {
-      //console.log(data);
-  
-      orderId = data.orderId;
-      sessionStorage.setItem("orderId", orderId);
-      console.log(orderId);
-      location.replace('confirm.html');
-  
-    }).catch((err) => {
-      console.log(err);
-    })
-  };
 // API export function
-// makeRequest = (data) => {
-//     return new Promise((resolve, reject) => {
-//         let request = new XMLHttpRequest();
-//         request.open('POST', 'http://localhost:3000/api/teddies/order');
-//         request.setRequestHeader('Content-Type', 'application/json');
-//         request.send(JSON.stringify(data));
-//         request.send(data);
-//         request.onreadystatechange = () => {
-//             if (request.readyState === 4) {
-//                 console.log('cart.js[94]')
-//                 if (request.status === 201) {
-//                     // Response successful
-//                     resolve(JSON.parse(request.response));
-//                      orderId = data.orderId;
-//                     sessionStorage.setItem("orderId", orderId);
-//                     console.log(orderId);
-//                 }
-//                 if (request.status === 400) {
-//                     // Unsuccessful
-//                     console.log(request.status)
-//                     reject('Request unsuccessful');
-//                 }
-//             }
-//         }
-//     });
-// }
+function makeRequest(data) {
+  fetch('http://localhost:3000/api/teddies/order', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then((response) => {
+    return response.json();
+  }).then((data) => {
+    //console.log(data);
 
-// submit = async () => {
-//     try {
-//         // Run makeRequest and wait for a response
-//         //const stringPost = sessionStorage.getItem('stringPost')
-//         const requestPromise = makeRequest(postObject);
-//         const response = await requestPromise;
-//         console.log(response)
-//         // Display response
+    orderId = data.orderId;
+    sessionStorage.setItem("orderId", orderId);
+    console.log(orderId);
+    location.replace('confirm.html');
 
-//     }   catch (error) {
-//         // Failed request
-//         document.querySelector('form').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
-//     }
-// }
-
-// submit();
+  }).catch((err) => {
+    console.log(err);
+  })
+};
