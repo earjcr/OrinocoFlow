@@ -9,20 +9,12 @@ const choiceColor       = sessionStorage.getItem('choiceColor');
 const choicePrice       = sessionStorage.getItem('choicePrice');
 const choiceId          = sessionStorage.getItem('choiceId');
 
-// Create the stringify'd new product choice for adding to the cart 
-let string = '{'
-string = string + '"name":"'   + choiceName  + '",'
-string = string + '"color":"'  + choiceColor + '",'
-string = string + '"price":"'  + choicePrice + '",'
-string = string + '"_id":"'    + choiceId    + '"}'
-console.log(string);
-
 // Initialize the valuesChecked variable
 const valuesChecked = 0
 
 // Create product array if it does not yet exist, and add the choiceId to the array
 // if (!sessionStorage['cartProduct']) {
-    sessionStorage.setItem('cartProduct', string);
+//    sessionStorage.setItem('cartProduct', string);
 // } else {
 // NEED TO ADD THE PROGRAMMING FOR MULTIPLE ITEMS
 // }
@@ -52,78 +44,103 @@ editCart = () => {
     const btnCheckout = document.getElementById('btnCheckout');
     btnCheckout.addEventListener('click', () => {
         // Get the "final" customer info from the form
-        const firstName = document.getElementById('firstName');
-        const lastName  = document.getElementById('lastName' );
-        const address   = document.getElementById('address'  );
-        const address2  = document.getElementById('address2' );
-        const city      = document.getElementById('city'     );
-        const email     = document.getElementById('email'    );
-        // const postal    = document.getElementById('postal'   )
-        console.log('cart.js[62]');
-        // Create the stringify'd customer info for POSTing to the API 
-        let stringPost = '{contact:{'
-        console.log(stringPost);
-        stringPost = stringPost + 'firstName: "Eric", ' //  + "EricfirstName.textContent + '",';
-        console.log(stringPost);
-        stringPost = stringPost + 'lastName: "Rudy", ' // + lastName.textContent  + '",';
-        console.log(stringPost);
-        stringPost = stringPost + 'address: "1108 Earl Street", ' //   + address.textContent   + '",';
-        console.log(stringPost);
-        stringPost = stringPost + 'city: "Philadelphia", ' //      + city.textContent      + '",';
-        console.log(stringPost);
-        stringPost = stringPost + 'email: "earjcr@msn.com"},' //     + email.textContent     + '"},';
-        console.log(stringPost)
-        stringPost = stringPost + 'products: ["5beaabe91c9d440000a57d96"]}' // + choiceId        + '"}]';
-        console.log(stringPost)
-        sessionStorage.setItem('stringPost', stringPost);
-        console.log('cart.js[79]');
-        console.log(stringPost);
-        submit();
-    })
-}
-// API export function
-makeRequest = (data) => {
-    return new Promise((resolve, reject) => {
-        let apiRequest = new XMLHttpRequest();
-        apiRequest.open('POST', 'http://localhost:3000/api/teddies/order');
-        apiRequest.setRequestHeader('Content-Type', 'application/json');
-        // apiRequest.send(JSON.stringify(data));
-        apiRequest.send(data);
-        apiRequest.onreadystatechange = () => {
-            if (apiRequest.readyState === 4) {
-                console.log('cart.js[94]')
-                if (apiRequest.status === 201) {
-                    // Response successful
-                    resolve(JSON.parse(apiRequest.response));
-                     orderId = data.orderId;
-                    sessionStorage.setItem("orderId", orderId);
-                    console.log(orderId);
-                }
-                if (apiRequest.status === 400) {
-                    // Unsuccessful
-                    console.log(apiRequest.status)
-                    reject('Error - API Request unsuccessful');
-                }
-            }
+        let products = [];
+
+        //get id prod and push it in array
+        // let cartArray = JSON.parse(localStorage.getItem('cart'));
+        // for (let i = 0; i < cartArray.length; i++) {
+        //   products.push(choiceid);
+        // }
+        products.push(choiceId);
+        let firstName = document.getElementById('firstName');
+        let lastName = document.getElementById('lastName');
+        let address = document.getElementById('address');
+        let city = document.getElementById('city');
+        let zip = document.getElementById('zip');
+        let email = document.getElementById('email');
+        // Object stores informations from form
+        let contact = {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          email: email.value,
+          address: address.value,
+          city: city.value,
+          zip: zip.value,
         }
-    });
+        let data = {
+          contact: contact,
+          products: products,
+        }
+        makeRequest(data);
+
+        //submit();
+    })
 }
 
 editCart();
 
-submit = async () => {
-    try {
-        // Run makeRequest and wait for a response
-        const stringPost = sessionStorage.getItem('stringPost')
-        const requestPromise = makeRequest(stringPost);
-        const response = await requestPromise;
-        console.log(response)
-        // Display response
+function makeRequest(data) {
+    fetch('http://localhost:3000/api/teddies/order', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+      //console.log(data);
+  
+      orderId = data.orderId;
+      sessionStorage.setItem("orderId", orderId);
+      console.log(orderId);
+      location.replace('confirm.html');
+  
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
+// API export function
+// makeRequest = (data) => {
+//     return new Promise((resolve, reject) => {
+//         let request = new XMLHttpRequest();
+//         request.open('POST', 'http://localhost:3000/api/teddies/order');
+//         request.setRequestHeader('Content-Type', 'application/json');
+//         request.send(JSON.stringify(data));
+//         request.send(data);
+//         request.onreadystatechange = () => {
+//             if (request.readyState === 4) {
+//                 console.log('cart.js[94]')
+//                 if (request.status === 201) {
+//                     // Response successful
+//                     resolve(JSON.parse(request.response));
+//                      orderId = data.orderId;
+//                     sessionStorage.setItem("orderId", orderId);
+//                     console.log(orderId);
+//                 }
+//                 if (request.status === 400) {
+//                     // Unsuccessful
+//                     console.log(request.status)
+//                     reject('Request unsuccessful');
+//                 }
+//             }
+//         }
+//     });
+// }
 
-    }   catch (error) {
-        // Failed request
-        document.querySelector('form').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
-    }
-}
+// submit = async () => {
+//     try {
+//         // Run makeRequest and wait for a response
+//         //const stringPost = sessionStorage.getItem('stringPost')
+//         const requestPromise = makeRequest(postObject);
+//         const response = await requestPromise;
+//         console.log(response)
+//         // Display response
+
+//     }   catch (error) {
+//         // Failed request
+//         document.querySelector('form').innerHTML = '<h2 class = "mx-auto">' + error + '<h2>';
+//     }
+// }
 
 // submit();

@@ -83,7 +83,7 @@ createCard = (response) => {
                         addItem.setAttribute('href', 'cart.html');   
                     };
                     sessionStorage.setItem('colorChosen', true);
-                    let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + currentPrice + '}';
+                    let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + choicePrice + '}';
                     // sessionStorage.setItem('cart', {"colors":["Tan","Chocolate","Black","White"],"_id":"5be9c8541c9d440000665243","name":"Norbert"       ,"price":2900,
 
                 });
