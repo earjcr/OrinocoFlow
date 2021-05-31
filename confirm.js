@@ -6,4 +6,14 @@ let orderId = document.getElementById('orderId');
 //totalCost.innerHTML = '$' + ' ' + sessionStorage.getItem('choicePrice');
 orderId.innerHTML = sessionStorage.getItem('orderId');
 
+// Remove all sessionStorage items
+sessionStorage.removeItem('orderId');
+sessionStorage.removeItem('choiceId');
+sessionStorage.removeItem('choiceName');
+sessionStorage.removeItem('choiceColor');
+sessionStorage.removeItem('choicePrice');
+sessionStorage.removeItem('choice');
+sessionStorage.removeItem('colorChosen');
+
+
 

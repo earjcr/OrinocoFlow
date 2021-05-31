@@ -2,31 +2,42 @@
 
 // Reset the indicator
 sessionStorage.setItem('colorChosen', false);
-let orderId;
 
-// Import the product data of the chosen bear
+// Import the product data of the newly chosen bear
+const choiceId          = sessionStorage.getItem('choiceId');
 const choiceName        = sessionStorage.getItem('choiceName');
 const choiceColor       = sessionStorage.getItem('choiceColor');
 const choicePrice       = sessionStorage.getItem('choicePrice');
-const choiceId          = sessionStorage.getItem('choiceId');
 
-// Initialize the valuesChecked variable
+// Create sessionStorage variable named 'cart', if doesn't exist, and append newly chosen bear
+createCart = () => {
+  let cart = sessionStorage.getItem('cart');
+  if (!sessionStorage['cart']) {
+     cart = []
+   } else {
+     cart = JSON.parse(cart);     
+   };
+  let choice = {
+      name:  choiceName,
+      id:    choiceId,
+      price: choicePrice,
+      color: choiceColor,
+  };
+  cart.push(choice);
+  sessionStorage.setItem('cart', JSON.stringify(cart));
+};
+
+createCart ();
+
+// Initialize variables
+let orderId;
 const valuesChecked = 0
-
-// Create product array if it does not yet exist, and add the choiceId to the array
-// if (!sessionStorage['cartProduct']) {
-//    sessionStorage.setItem('cartProduct', string);
-// } else {
-// NEED TO ADD THE PROGRAMMING FOR MULTIPLE ITEMS
-// }
-
-// sessionStorage.setItem('cartProduct', (sessionStorage.getItem('cartProduct')) && choiceId);
-
-// Initialize the total cost
 let totalPrice = 0
 
-editCart = () => {
-    // First Card Elements showing the chosen bear info and cart contents
+displayCart = () => {
+  // First Card Elements showing the chosen bear info and cart contents
+  let cart = sessionStorage.getItem('cart');
+  //for (let i in cart.length) {
 
     // Add product to Cart Contents
     const addName = document.getElementById('addName');
@@ -45,40 +56,38 @@ editCart = () => {
     const btnCheckout = document.getElementById('btnCheckout');
     btnCheckout.addEventListener('click', () => {
         // Get the "final" customer info from the form
-        let products = [];
+        let products = JSON.parse(sessionStorage.getItem('cart'));
 
         //get id prod and push it in array
         // let cartArray = JSON.parse(localStorage.getItem('cart'));
         // for (let i = 0; i < cartArray.length; i++) {
         //   products.push(choiceid);
         // }
-        products.push(choiceId);
+        //products.push(choiceId);
         let firstName = document.getElementById('firstName');
-        let lastName = document.getElementById('lastName');
-        let address = document.getElementById('address');
-        let city = document.getElementById('city');
-        let zip = document.getElementById('zip');
-        let email = document.getElementById('email');
-        // Object stores informations from form
+        let lastName  = document.getElementById('lastName');
+        let address   = document.getElementById('address');
+        let city      = document.getElementById('city');
+        let zip       = document.getElementById('zip');
+        let email     = document.getElementById('email');
+        // Object stores information from form
         let contact = {
           firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          address: address.value,
-          city: city.value,
-          zip: zip.value,
+          lastName:  lastName.value,
+          email:     email.value,
+          address:   address.value,
+          city:      city.value,
+          zip:       zip.value,
         }
         const data = {
           contact: contact,
           products: products,
         }
         makeRequest(data);
-
-        //submit(orderObject);
     })
-}
+};
 
-editCart();
+displayCart();
 
 // API export function
 function makeRequest(data) {
