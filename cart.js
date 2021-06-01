@@ -35,9 +35,11 @@ const valuesChecked = 0
 let totalPrice = 0
 
 displayCart = () => {
-  // First Card Elements showing the chosen bear info and cart contents
-  let cart = sessionStorage.getItem('cart');
-  //for (let i in cart.length) {
+  // First Card Elements: showing the chosen bear info and cart contents
+  
+
+  let cart = JSON.parse(sessionStorage.getItem('cart'));
+  for (let j = 0; j < cart.length; j++) {
 
     // Add product to Cart Contents
     const addName = document.getElementById('addName');
@@ -49,21 +51,20 @@ displayCart = () => {
     const addTotal = document.getElementById('totalPrice');
         totalPrice = totalPrice + choicePrice;
         addTotal.textContent = totalPrice / 100;
+  }
 
-    // Second card gets information for the purchasor
+    // Second Card Elements: form information for the purchasor
     console.log('cart.js[50]');
     // Get customer info after clicking checkout button
     const btnCheckout = document.getElementById('btnCheckout');
     btnCheckout.addEventListener('click', () => {
+        // Assemble the products array
+        let cart = JSON.parse(sessionStorage.getItem('cart'));
+        let products = [];
+        for (let i = 0; i < cart.length; i++) {
+          products.push(cart[i].id);
+        }
         // Get the "final" customer info from the form
-        let products = JSON.parse(sessionStorage.getItem('cart'));
-
-        //get id prod and push it in array
-        // let cartArray = JSON.parse(localStorage.getItem('cart'));
-        // for (let i = 0; i < cartArray.length; i++) {
-        //   products.push(choiceid);
-        // }
-        //products.push(choiceId);
         let firstName = document.getElementById('firstName');
         let lastName  = document.getElementById('lastName');
         let address   = document.getElementById('address');
@@ -81,7 +82,7 @@ displayCart = () => {
         }
         const data = {
           contact: contact,
-          products: products,
+          products: products
         }
         makeRequest(data);
     })
