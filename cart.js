@@ -41,24 +41,21 @@ displayCart = () => {
   const addRemove = document.getElementById('addRemove');
 
   // Remove all children from ul's
-  // while (addName.hasChildNodes()) {  
-  //   addName.removeChild(addName.firstChild);
-  //   addPrice.removeChild(addPrice.firstChild);
-  //   addRemove.removeChild(addRemove.firstChild);
-  // }
+  while (addName.hasChildNodes()) {  
+    addName.removeChild(addName.firstChild);
+    addPrice.removeChild(addPrice.firstChild);
+    addRemove.removeChild(addRemove.firstChild);
+  }
 
   // Build up the Cart Contents, starting with the column header
   let newName = document.createElement('li');
       newName.textContent = 'Bear'
-      newName.classList.add('list-inline-item');
       addName.appendChild(newName);
   let newPrice = document.createElement('li');
       newPrice.textContent = 'Price'
-      newPrice.classList.add('list-inline-item');
       addPrice.appendChild(newPrice);
   let newRemove = document.createElement('li');
       newRemove.textContent = 'Remove'
-      newRemove.classList.add('list-inline-item');
       addRemove.appendChild(newRemove);
 
   // Create 'Remove' button that will be replicated
@@ -77,18 +74,15 @@ displayCart = () => {
     // Bear name and color
       newName = document.createElement('li');
       newName.textContent = cartEntry.name + ' - ' + cartEntry.color;
-      newName.classList.add('list-inline-item');
       addName.appendChild(newName);
     // Price of bear
       newPrice = document.createElement('li');
       newPrice.textContent = cartEntry.price / 100;
-      newPrice.classList.add('list-inline-item');
       addPrice.appendChild(newPrice);
       totalPrice = totalPrice + cartEntry.price * 1;
     // Removal button
       newRemove = document.createElement('li');
       newRemove.textContent = 'X';
-      newRemove.classList.add('list-inline-item');
       addRemove.appendChild(newRemove);
 
     // let remove = btnRemove;
@@ -99,21 +93,10 @@ displayCart = () => {
     // remove.setAttribute('type', 'button');
     // addRemove.appendChild(remove);
   }    
-  // Add last row in Cart Contents
-    newName = document.createElement('li');
-    newName.textContent = 'Total';
-    newName.classList.add('list-inline-item');
-    addName.appendChild(newName);
-  // Price of bear
-    newPrice = document.createElement('li');
-    newPrice.textContent = totalPrice / 100;
-    newPrice.classList.add('list-inline-item');
-    addPrice.appendChild(newPrice);
-  // Removal button
-    newRemove = document.createElement('li');
-    newRemove.textContent = ' ';
-    newRemove.classList.add('list-inline-item');
-    addRemove.appendChild(newRemove);
+  // Insert totalPrice into HTML
+    totalPrice = totalPrice / 100;
+    sum = document.getElementById('totalPrice');
+    sum.textContent = totalPrice;
 
   // Add last row in Cart Contents
   // newName.textContent = 'Total Price';
