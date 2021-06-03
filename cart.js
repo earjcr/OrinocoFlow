@@ -10,7 +10,7 @@ createCart = () => {
   const choiceColor = sessionStorage.getItem('choiceColor');
   const choicePrice = sessionStorage.getItem('choicePrice');
 
-  // If cart exists, assign variable. If not, create it
+  // If cart doesn't exist, create it. Otherwise, get it
   let cart = sessionStorage.getItem('cart');
   if (!sessionStorage['cart']) {
      cart = []
@@ -47,16 +47,14 @@ displayCart = () => {
     addRemove.removeChild(addRemove.firstChild);
   }
 
-  // Build up the Cart Contents, starting with the column header
-  let newName = document.createElement('li');
-      newName.textContent = 'Bear'
-      addName.appendChild(newName);
-  let newPrice = document.createElement('li');
-      newPrice.textContent = 'Price'
-      addPrice.appendChild(newPrice);
-  let newRemove = document.createElement('li');
-      newRemove.textContent = 'Remove'
-      addRemove.appendChild(newRemove);
+  // Initiate the Cart Contents variables
+  let newName
+  let newPrice
+  let newRemove
+  let totalPrice = 0;
+  let spliceNumber = null
+  let cartEntry
+  let skipEntry
 
   // Create 'Remove' button that will be replicated
   let btnRemove = document.createElement('button');
@@ -65,46 +63,44 @@ displayCart = () => {
       btnRemove.classList.add('btn-danger'); 
       btnRemove.classList.add('list-inline');
 
-  let totalPrice = 0;
-  let splice = null
-  let cartEntry
   // Loop through to add each bear info to Cart Contents
   for (let j = 0; j < cart.length; j++) {
     cartEntry = cart[j];
+    skipEntry = false
     // Bear name and color
       newName = document.createElement('li');
       newName.textContent = cartEntry.name + ' - ' + cartEntry.color;
-      addName.appendChild(newName);
     // Price of bear
       newPrice = document.createElement('li');
       newPrice.textContent = cartEntry.price / 100;
-      addPrice.appendChild(newPrice);
-      totalPrice = totalPrice + cartEntry.price * 1;
     // Removal button
-      newRemove = document.createElement('li');
-      newRemove.textContent = 'X';
-      addRemove.appendChild(newRemove);
-
-    // let remove = btnRemove;
-    // remove.addEventListener('click', () => {
-    //   spliceNumber = j;
-    //   //RESOLVE WHEN CODING REMOVAL: continue;
-    // });
-    // remove.setAttribute('type', 'button');
-    // addRemove.appendChild(remove);
+      newRemove = document.createElement('button');
+      newRemove.classList.add('btn')
+      newRemove.classList.add('btn-danger')
+      newRemove.classList.add('btn-xs')
+      newRemove.classList.add('py-2')
+      newRemove.setAttribute('type', 'button')
+      newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
+      newRemove.addEventListener('click', () => {
+        spliceNumber = j;
+        skipEntry = true
+      })
+    // Append bear if removal not clicked 
+      if (!skipEntry) {
+        addName.appendChild(newName);
+        addPrice.appendChild(newPrice);
+        totalPrice = totalPrice + cartEntry.price * 1;
+        addRemove.appendChild(newRemove);
+      }
   }    
   // Insert totalPrice into HTML
     totalPrice = totalPrice / 100;
     sum = document.getElementById('totalPrice');
     sum.textContent = totalPrice;
 
-  // Add last row in Cart Contents
-  // newName.textContent = 'Total Price';
-  // addName.appendChild(newName);
-  // newPrice.textContent = totalPrice / 100;
-  // addPrice.appendChild(newPrice);
-  // RESOLVE WHEN CODING REMOVAL cart.splice(spliceNumber,1)
-  sessionStorage.setItem("cart", JSON.stringify(cart));
+  // Store cart after "splice"ing out a removed item 
+    if (!spliceNumber === null) {cart.splice(spliceNumber, 1)};
+    sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
 displayCart();
