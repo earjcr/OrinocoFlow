@@ -70,11 +70,14 @@ displayCart = () => {
     // Bear name and color
       newName = document.createElement('li');
       newName.textContent = cartEntry.name + ' - ' + cartEntry.color;
-    // Price of bear
+      addName.appendChild(newName);
+      // Price of bear
       newPrice = document.createElement('li');
       newPrice.textContent = cartEntry.price / 100;
-    // Removal button
-      newRemove = document.createElement('button');
+      addPrice.appendChild(newPrice);
+      totalPrice = totalPrice + cartEntry.price * 1;
+      // Removal button
+      newRemove = document.createElement('li');
       newRemove.classList.add('btn')
       newRemove.classList.add('btn-danger')
       newRemove.classList.add('btn-xs')
@@ -82,16 +85,11 @@ displayCart = () => {
       newRemove.setAttribute('type', 'button')
       newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
       newRemove.addEventListener('click', () => {
-        spliceNumber = j;
-        skipEntry = true
-      })
-    // Append bear if removal not clicked 
-      if (!skipEntry) {
-        addName.appendChild(newName);
-        addPrice.appendChild(newPrice);
-        totalPrice = totalPrice + cartEntry.price * 1;
-        addRemove.appendChild(newRemove);
-      }
+        cart.splice(j, 1)
+        sessionStorage.setItem("cart", JSON.stringify(cart));
+        location.reload();
+      });
+      addRemove.appendChild(newRemove);
   }    
   // Insert totalPrice into HTML
     totalPrice = totalPrice / 100;
@@ -99,7 +97,6 @@ displayCart = () => {
     sum.textContent = totalPrice;
 
   // Store cart after "splice"ing out a removed item 
-    if (!spliceNumber === null) {cart.splice(spliceNumber, 1)};
     sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
