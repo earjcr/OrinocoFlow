@@ -1,5 +1,5 @@
 // Reset the indicator
-sessionStorage.setItem('colorChosen', false);
+let colorChosen = sessionStorage.getItem('colorChosen');
 let orderId;
 const valuesChecked = 0
 
@@ -25,8 +25,11 @@ createCart = () => {
     color: choiceColor,
     price: choicePrice,
   };
-  cart.push(choice);
+  if ('1' === sessionStorage.getItem('colorChosen')) {
+    cart.push(choice);
+  };
   sessionStorage.setItem('cart', JSON.stringify(cart));
+  sessionStorage.setItem('colorChosen', '0');
 };
 
 createCart ();
@@ -56,13 +59,6 @@ displayCart = () => {
   let cartEntry
   let skipEntry
 
-  // Create 'Remove' button that will be replicated
-  let btnRemove = document.createElement('button');
-      btnRemove.textContent = 'X';
-      btnRemove.classList.add('btn'); 
-      btnRemove.classList.add('btn-danger'); 
-      btnRemove.classList.add('list-inline');
-
   // Loop through to add each bear info to Cart Contents
   for (let j = 0; j < cart.length; j++) {
     cartEntry = cart[j];
@@ -70,23 +66,28 @@ displayCart = () => {
     // Bear name and color
       newName = document.createElement('li');
       newName.textContent = cartEntry.name + ' - ' + cartEntry.color;
+      newName.classList.add('py-1')
       addName.appendChild(newName);
       // Price of bear
       newPrice = document.createElement('li');
       newPrice.textContent = cartEntry.price / 100;
+      newPrice.classList.add('py-1')
       addPrice.appendChild(newPrice);
       totalPrice = totalPrice + cartEntry.price * 1;
       // Removal button
       newRemove = document.createElement('li');
       newRemove.classList.add('btn')
-      newRemove.classList.add('btn-danger')
       newRemove.classList.add('btn-xs')
-      newRemove.classList.add('py-2')
+      newRemove.classList.add("btn-outline-danger");
+      newRemove.classList.add('py-0')
       newRemove.setAttribute('type', 'button')
-      newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
+      newRemove.textContent = 'Remove'
+      //newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
       newRemove.addEventListener('click', () => {
         cart.splice(j, 1)
         sessionStorage.setItem("cart", JSON.stringify(cart));
+          sessionStorage.setItem('colorChosen', '0');
+
         location.reload();
       });
       addRemove.appendChild(newRemove);
@@ -97,7 +98,7 @@ displayCart = () => {
     sum.textContent = totalPrice;
 
   // Store cart after "splice"ing out a removed item 
-    sessionStorage.setItem("cart", JSON.stringify(cart));
+  //  sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
 displayCart();
@@ -150,13 +151,10 @@ function makeRequest(data) {
   }).then((response) => {
     return response.json();
   }).then((data) => {
-    //console.log(data);
-
     orderId = data.orderId;
     sessionStorage.setItem("orderId", orderId);
     console.log(orderId);
     location.replace('confirm.html');
-
   }).catch((err) => {
     console.log(err);
   })
