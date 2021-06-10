@@ -96,15 +96,42 @@ displayCart = () => {
     totalPrice = totalPrice / 100;
     sum = document.getElementById('totalPrice');
     sum.textContent = totalPrice;
-
-  // Store cart after "splice"ing out a removed item 
-  //  sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
 displayCart();
 
 createPage = () => { 
-// Second Card Elements: form information for the purchasor
+// // Example starter JavaScript for disabling form submissions if there are invalid fields
+// (function() {
+//   'use strict';
+//   window.addEventListener('load', function() {
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     var forms = document.getElementsByClassName('needs-validation');
+//     // Loop over them and prevent submission
+//     var validation = Array.prototype.filter.call(forms, function(form) {
+//       form.addEventListener('submit', function(event) {
+//         if (form.checkValidity() === false) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         }
+//         form.classList.add('was-validated');
+//       }, false);
+//     });
+//   }, false);
+})();
+  // Second Card Elements: form information for the purchasor
+    let firstName = document.getElementById('firstName');
+    let validFirstName = false
+      firstName.addEventListener('click', () => {
+        
+      });
+
+    let lastName  = document.getElementById('lastName');
+    let address   = document.getElementById('address');
+    let city      = document.getElementById('city');
+    let zip       = document.getElementById('zip');
+    let email     = document.getElementById('email');
+
 // Get customer info after clicking checkout button
 const btnCheckout = document.getElementById('btnCheckout');
   btnCheckout.addEventListener('click', () => {
@@ -114,13 +141,6 @@ const btnCheckout = document.getElementById('btnCheckout');
     for (let i = 0; i < cart.length; i++) {
       products.push(cart[i].id);
     }
-    // Get the "final" customer info from the form
-    let firstName = document.getElementById('firstName');
-    let lastName  = document.getElementById('lastName');
-    let address   = document.getElementById('address');
-    let city      = document.getElementById('city');
-    let zip       = document.getElementById('zip');
-    let email     = document.getElementById('email');
     // Object stores information from form
     let contact = {
       firstName: firstName.value,
@@ -130,6 +150,7 @@ const btnCheckout = document.getElementById('btnCheckout');
       city:      city.value,
       zip:       zip.value,
     }
+    
     const data = {
       contact: contact,
       products: products
