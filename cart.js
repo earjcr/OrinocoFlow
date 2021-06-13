@@ -109,101 +109,158 @@ createPage = () => {
   let charAlphaNumeric = /^[A-Za-z0-9 -#./&']{7,32}$/;
   let charEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; //www.regular-expressions.info/email.html
   
+  let validFirstName = validLastName = validEmail = validAddress = validCity = validZip = 0;
+
   let firstName = document.getElementById('firstName');
-  let validFirstName = 0;
   firstName.addEventListener('blur', () => {
     if (charAlpha.test(firstName.value)) {
       validFirstName = 1;
       firstName.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validFirstName = 0;
       firstName.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid First Name'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //setAttribute('disabled');   
     };
   });
 
   let lastName = document.getElementById('lastName');
-  let validLastName = 0;
   lastName.addEventListener('blur', () => {
     if (charAlpha.test(lastName.value)) {
       validLastName = 1;
       lastName.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validLastName = 0;
       lastName.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid Last Name'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //.setAttribute('disabled');   
     };
   });
 
   let email = document.getElementById('email');
-  let validEmail = 0;
   email.addEventListener('blur', () => {
     if (charEmail.test(email.value)) {
       validEmail = 1;
       email.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validEmail = 0;
       email.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid Email'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //.setAttribute('disabled');   
     };
   });
 
   let address = document.getElementById('address');
-  let validAddress = 0
   address.addEventListener('blur', () => {
     if (charAlphaNumeric.test(address.value)) {
       validAddress = 1;
       address.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validAddress = 0;
       address.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid Address'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //.setAttribute('disabled');   
     };
   });
 
   let city = document.getElementById('city');
-  let validCity = 0
   city.addEventListener('blur', () => {
     if (charAlpha.test(city.value)) {
       validCity = 1;
       city.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validCity = 0;
       city.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid City'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //.setAttribute('disabled');   
     };
   });
 
   let zip = document.getElementById('zip');
-  let validZip = 0
   zip.addEventListener('blur', () => {
     if (charNumeric.test(zip.value)) {
       validZip = 1;
       zip.style.border = 'medium solid green';
+      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+        btnCheckout.classList.remove('btn-warning');
+        btnCheckout.classList.add('btn-success');
+        btnCheckout.textContent = 'Checkout'
+        btnCheckout.removeAttribute('disabled');   
+      };
     } else {
+      validZip = 0;
       zip.style.border = 'medium solid red';
+      btnCheckout.textContent = 'Invalid Zip Code'
+      btnCheckout.classList.remove('btn-success');
+      btnCheckout.classList.add('btn-primary');
+      btnCheckout.disabled = true //.setAttribute('disabled');   
     };
   });
 
-  // If all input is valid, build the contact/products object and POST
-  if (1-(validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
-    const btnCheckout = document.getElementById('btnCheckout');
-    btnCheckout.classList.remove('btn-dark');
-    btnCheckout.classList.add('btn-success');
-    btnCheckout.addEventListener('click', () => {
-      // Assemble the products array
-      let cart = JSON.parse(sessionStorage.getItem('cart'));
-      let products = [];
-      for (let i = 0; i < cart.length; i++) {
-        products.push(cart[i].id);
-      }
-      // Object stores information from form
-      let contact = {
-        firstName: firstName.value,
-        lastName:  lastName.value,
-        email:     email.value,
-        address:   address.value,
-        city:      city.value,
-        zip:       zip.value,
-      }
+  const btnCheckout = document.getElementById('btnCheckout');
+  btnCheckout.addEventListener('click', () => {
+    // Assemble the products array
+    let cart = JSON.parse(sessionStorage.getItem('cart'));
+    let products = [];
+    for (let i = 0; i < cart.length; i++) {
+      products.push(cart[i].id);
+    }
+    // Object stores information from form
+    let contact = {
+      firstName: firstName.value,
+      lastName:  lastName.value,
+      email:     email.value,
+      address:   address.value,
+      city:      city.value,
+      zip:       zip.value,
+    }
       
-      const data = {
-        contact: contact,
-        products: products
-      }
-      makeRequest(data);
-    })
-  }
+    const data = {
+      contact: contact,
+      products: products
+    }
+    makeRequest(data);
+  });
 };
 
 createPage();

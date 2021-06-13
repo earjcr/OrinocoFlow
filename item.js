@@ -27,7 +27,6 @@ makeRequest = () => {
     });
 }
 
-
 createCard = (response) => {
     const section = document.querySelector('section');
         // Get choice of bear from sessionStorage
