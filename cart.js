@@ -101,62 +101,109 @@ displayCart = () => {
 displayCart();
 
 createPage = () => { 
-// // Example starter JavaScript for disabling form submissions if there are invalid fields
-// (function() {
-//   'use strict';
-//   window.addEventListener('load', function() {
-//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//     var forms = document.getElementsByClassName('needs-validation');
-//     // Loop over them and prevent submission
-//     var validation = Array.prototype.filter.call(forms, function(form) {
-//       form.addEventListener('submit', function(event) {
-//         if (form.checkValidity() === false) {
-//           event.preventDefault();
-//           event.stopPropagation();
-//         }
-//         form.classList.add('was-validated');
-//       }, false);
-//     });
-//   }, false);
-})();
-  // Second Card Elements: form information for the purchasor
-    let firstName = document.getElementById('firstName');
-    let validFirstName = false
-      firstName.addEventListener('click', () => {
-        
-      });
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+  // Form nput fields for purchasor
 
-    let lastName  = document.getElementById('lastName');
-    let address   = document.getElementById('address');
-    let city      = document.getElementById('city');
-    let zip       = document.getElementById('zip');
-    let email     = document.getElementById('email');
+  let charAlpha = /^[A-Za-z -]{3,32}$/;
+  let charNumeric = /^[0-9 -]{3,32}$/;
+  let charAlphaNumeric = /^[A-Za-z0-9 -#./&']{7,32}$/;
+  let charEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; //www.regular-expressions.info/email.html
+  
+  let firstName = document.getElementById('firstName');
+  let validFirstName = 0;
+  firstName.addEventListener('blur', () => {
+    if (charAlpha.test(firstName.value)) {
+      validFirstName = 1;
+      firstName.style.border = 'medium solid green';
+    } else {
+      firstName.style.border = 'medium solid red';
+    };
+  });
 
-// Get customer info after clicking checkout button
-const btnCheckout = document.getElementById('btnCheckout');
-  btnCheckout.addEventListener('click', () => {
-    // Assemble the products array
-    let cart = JSON.parse(sessionStorage.getItem('cart'));
-    let products = [];
-    for (let i = 0; i < cart.length; i++) {
-      products.push(cart[i].id);
-    }
-    // Object stores information from form
-    let contact = {
-      firstName: firstName.value,
-      lastName:  lastName.value,
-      email:     email.value,
-      address:   address.value,
-      city:      city.value,
-      zip:       zip.value,
-    }
-    
-    const data = {
-      contact: contact,
-      products: products
-    }
-    makeRequest(data);
-  })
+  let lastName = document.getElementById('lastName');
+  let validLastName = 0;
+  lastName.addEventListener('blur', () => {
+    if (charAlpha.test(lastName.value)) {
+      validLastName = 1;
+      lastName.style.border = 'medium solid green';
+    } else {
+      lastName.style.border = 'medium solid red';
+    };
+  });
+
+  let email = document.getElementById('email');
+  let validEmail = 0;
+  email.addEventListener('blur', () => {
+    if (charEmail.test(email.value)) {
+      validEmail = 1;
+      email.style.border = 'medium solid green';
+    } else {
+      email.style.border = 'medium solid red';
+    };
+  });
+
+  let address = document.getElementById('address');
+  let validAddress = 0
+  address.addEventListener('blur', () => {
+    if (charAlphaNumeric.test(address.value)) {
+      validAddress = 1;
+      address.style.border = 'medium solid green';
+    } else {
+      address.style.border = 'medium solid red';
+    };
+  });
+
+  let city = document.getElementById('city');
+  let validCity = 0
+  city.addEventListener('blur', () => {
+    if (charAlpha.test(city.value)) {
+      validCity = 1;
+      city.style.border = 'medium solid green';
+    } else {
+      city.style.border = 'medium solid red';
+    };
+  });
+
+  let zip = document.getElementById('zip');
+  let validZip = 0
+  zip.addEventListener('blur', () => {
+    if (charNumeric.test(zip.value)) {
+      validZip = 1;
+      zip.style.border = 'medium solid green';
+    } else {
+      zip.style.border = 'medium solid red';
+    };
+  });
+
+  // If all input is valid, build the contact/products object and POST
+  if (1-(validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
+    const btnCheckout = document.getElementById('btnCheckout');
+    btnCheckout.classList.remove('btn-dark');
+    btnCheckout.classList.add('btn-success');
+    btnCheckout.addEventListener('click', () => {
+      // Assemble the products array
+      let cart = JSON.parse(sessionStorage.getItem('cart'));
+      let products = [];
+      for (let i = 0; i < cart.length; i++) {
+        products.push(cart[i].id);
+      }
+      // Object stores information from form
+      let contact = {
+        firstName: firstName.value,
+        lastName:  lastName.value,
+        email:     email.value,
+        address:   address.value,
+        city:      city.value,
+        zip:       zip.value,
+      }
+      
+      const data = {
+        contact: contact,
+        products: products
+      }
+      makeRequest(data);
+    })
+  }
 };
 
 createPage();
