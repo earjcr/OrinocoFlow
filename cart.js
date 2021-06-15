@@ -1,7 +1,9 @@
 // Reset the indicator
 let colorChosen = sessionStorage.getItem('colorChosen');
 let orderId;
-const valuesChecked = 0
+const valuesChecked = 0;
+let emptyCart = false;
+let validForm = false;
 
 createCart = () => {
   // Import the product data of the newly chosen bear
@@ -81,7 +83,7 @@ displayCart = () => {
       newRemove.classList.add("btn-outline-danger");
       newRemove.classList.add('py-0')
       newRemove.setAttribute('type', 'button')
-      newRemove.textContent = 'Remove'
+      newRemove.textContent = 'X'
       //newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
       newRemove.addEventListener('click', () => {
         cart.splice(j, 1)
@@ -96,6 +98,10 @@ displayCart = () => {
     totalPrice = totalPrice / 100;
     sum = document.getElementById('totalPrice');
     sum.textContent = totalPrice;
+
+    //emptyCart = (cart.length = 0)
+    emptyCart = (totalPrice === 0)
+    if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
 }
 
 displayCart();
@@ -116,7 +122,7 @@ createPage = () => {
     if (charAlpha.test(firstName.value)) {
       validFirstName = 1;
       firstName.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -125,10 +131,11 @@ createPage = () => {
     } else {
       validFirstName = 0;
       firstName.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid First Name';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //setAttribute('disabled');   
+      btnCheckout.classList.add('btn-warning');
+      btnCheckout.disabled = true;   
     };
   });
 
@@ -137,7 +144,7 @@ createPage = () => {
     if (charAlpha.test(lastName.value)) {
       validLastName = 1;
       lastName.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -146,10 +153,11 @@ createPage = () => {
     } else {
       validLastName = 0;
       lastName.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Last Name';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //.setAttribute('disabled');   
+      btnCheckout.classList.add('btn-warning');
+      btnCheckout.disabled = true;   
     };
   });
 
@@ -158,7 +166,7 @@ createPage = () => {
     if (charEmail.test(email.value)) {
       validEmail = 1;
       email.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -167,10 +175,11 @@ createPage = () => {
     } else {
       validEmail = 0;
       email.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Email';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //.setAttribute('disabled');   
+      btnCheckout.classList.add('btn-warning');
+      btnCheckout.disabled = true;   
     };
   });
 
@@ -179,7 +188,7 @@ createPage = () => {
     if (charAlphaNumeric.test(address.value)) {
       validAddress = 1;
       address.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -188,10 +197,11 @@ createPage = () => {
     } else {
       validAddress = 0;
       address.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Address';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //.setAttribute('disabled');   
+      btnCheckout.classList.add('btn-warning');
+      btnCheckout.disabled = true;   
     };
   });
 
@@ -200,7 +210,7 @@ createPage = () => {
     if (charAlpha.test(city.value)) {
       validCity = 1;
       city.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -209,10 +219,11 @@ createPage = () => {
     } else {
       validCity = 0;
       city.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid City';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //.setAttribute('disabled');   
+      btnCheckout.classList.add('btn-warning');
+      btnCheckout.disabled = true;   
     };
   });
 
@@ -221,7 +232,7 @@ createPage = () => {
     if (charNumeric.test(zip.value)) {
       validZip = 1;
       zip.style.border = 'medium solid green';
-      if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
+      if ((!emptyCart) && (validFirstName * validLastName * validEmail * validAddress * validCity * validZip)) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
         btnCheckout.textContent = 'Checkout';
@@ -230,9 +241,10 @@ createPage = () => {
     } else {
       validZip = 0;
       zip.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Zip Code';
+      btnCheckout.textContent = 'Correct invalid input fields';
+      if (emptyCart) {btnCheckout.textContent = 'Cart is Empty'}
       btnCheckout.classList.remove('btn-success');
-      btnCheckout.classList.add('btn-primary');
+      btnCheckout.classList.add('btn-warning');
       btnCheckout.disabled = true;  
     };
   });
