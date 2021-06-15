@@ -14,4 +14,4 @@ sessionStorage.removeItem('choiceColor');
 sessionStorage.removeItem('choicePrice');
 sessionStorage.removeItem('choice');
 sessionStorage.removeItem('colorChosen');
-//sessionStorage.removeItem('cart');
+sessionStorage.removeItem('cart');

@@ -119,13 +119,13 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validFirstName = 0;
       firstName.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid First Name'
+      btnCheckout.textContent = 'Invalid First Name';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
       btnCheckout.disabled = true //setAttribute('disabled');   
@@ -140,13 +140,13 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validLastName = 0;
       lastName.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Last Name'
+      btnCheckout.textContent = 'Invalid Last Name';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
       btnCheckout.disabled = true //.setAttribute('disabled');   
@@ -161,13 +161,13 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validEmail = 0;
       email.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Email'
+      btnCheckout.textContent = 'Invalid Email';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
       btnCheckout.disabled = true //.setAttribute('disabled');   
@@ -182,13 +182,13 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validAddress = 0;
       address.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Address'
+      btnCheckout.textContent = 'Invalid Address';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
       btnCheckout.disabled = true //.setAttribute('disabled');   
@@ -203,13 +203,13 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validCity = 0;
       city.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid City'
+      btnCheckout.textContent = 'Invalid City';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
       btnCheckout.disabled = true //.setAttribute('disabled');   
@@ -224,16 +224,16 @@ createPage = () => {
       if (validFirstName * validLastName * validEmail * validAddress * validCity * validZip) {
         btnCheckout.classList.remove('btn-warning');
         btnCheckout.classList.add('btn-success');
-        btnCheckout.textContent = 'Checkout'
+        btnCheckout.textContent = 'Checkout';
         btnCheckout.removeAttribute('disabled');   
       };
     } else {
       validZip = 0;
       zip.style.border = 'medium solid red';
-      btnCheckout.textContent = 'Invalid Zip Code'
+      btnCheckout.textContent = 'Invalid Zip Code';
       btnCheckout.classList.remove('btn-success');
       btnCheckout.classList.add('btn-primary');
-      btnCheckout.disabled = true //.setAttribute('disabled');   
+      btnCheckout.disabled = true;  
     };
   });
 
