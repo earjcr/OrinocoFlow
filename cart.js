@@ -1,5 +1,5 @@
 // Reset the indicator
-let colorChosen = sessionStorage.getItem('colorChosen');
+let colorChosen = localStorage.getItem('colorChosen');
 let orderId;
 const valuesChecked = 0;
 let emptyCart = false;
@@ -7,14 +7,14 @@ let validForm = false;
 
 createCart = () => {
   // Import the product data of the newly chosen bear
-  const choiceId    = sessionStorage.getItem('choiceId');
-  const choiceName  = sessionStorage.getItem('choiceName');
-  const choiceColor = sessionStorage.getItem('choiceColor');
-  const choicePrice = sessionStorage.getItem('choicePrice');
+  const choiceId    = localStorage.getItem('choiceId');
+  const choiceName  = localStorage.getItem('choiceName');
+  const choiceColor = localStorage.getItem('choiceColor');
+  const choicePrice = localStorage.getItem('choicePrice');
 
   // If cart doesn't exist, create it. Otherwise, get it
-  let cart = sessionStorage.getItem('cart');
-  if (!sessionStorage['cart']) {
+  let cart = localStorage.getItem('cart');
+  if (!localStorage['cart']) {
      cart = []
   } else {
      cart = JSON.parse(cart);     
@@ -27,18 +27,18 @@ createCart = () => {
     color: choiceColor,
     price: choicePrice,
   };
-  if ('1' === sessionStorage.getItem('colorChosen')) {
+  if ('1' === localStorage.getItem('colorChosen')) {
     cart.push(choice);
   };
-  sessionStorage.setItem('cart', JSON.stringify(cart));
-  sessionStorage.setItem('colorChosen', '0');
+  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem('colorChosen', '0');
 };
 
 createCart ();
 
 displayCart = () => {
   // First Card Elements: showing the Cart Contents
-  let cart = JSON.parse(sessionStorage.getItem('cart'));
+  let cart = JSON.parse(localStorage.getItem('cart'));
 
   // Assign parent ul columns for Name, Price, and Remove
   const addName   = document.getElementById('addName');
@@ -87,8 +87,8 @@ displayCart = () => {
       //newRemove.innerHTML = '<i class="bi bi-trash-fill"></i>';
       newRemove.addEventListener('click', () => {
         cart.splice(j, 1)
-        sessionStorage.setItem("cart", JSON.stringify(cart));
-          sessionStorage.setItem('colorChosen', '0');
+        localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem('colorChosen', '0');
 
         location.reload();
       });
@@ -252,7 +252,7 @@ createPage = () => {
   const btnCheckout = document.getElementById('btnCheckout');
   btnCheckout.addEventListener('click', () => {
     // Assemble the products array
-    let cart = JSON.parse(sessionStorage.getItem('cart'));
+    let cart = JSON.parse(localStorage.getItem('cart'));
     let products = [];
     for (let i = 0; i < cart.length; i++) {
       products.push(cart[i].id);
@@ -289,7 +289,7 @@ function makeRequest(data) {
     return response.json();
   }).then((data) => {
     orderId = data.orderId;
-    sessionStorage.setItem("orderId", orderId);
+    localStorage.setItem("orderId", orderId);
     console.log(orderId);
     location.replace('confirm.html');
   }).catch((err) => {

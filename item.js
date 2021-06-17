@@ -1,10 +1,10 @@
 // THIS FILE WAS CREATED FROM THE index.js FILE
 // THE CODE WAS ALTERED SLIGHTLY TO MAKE FUTURE EDITS EASIER
-// THE CHOICE OF BEAR IS IN sessionStorage
+// THE CHOICE OF BEAR IS IN localStorage
 
-sessionStorage.setItem('colorChosen', false);
-const choiceId = sessionStorage.getItem('choiceId');
-const i = sessionStorage.getItem('choice');
+localStorage.setItem('colorChosen', false);
+const choiceId = localStorage.getItem('choiceId');
+const i = localStorage.getItem('choice');
 
 // API import function
 makeRequest = () => {
@@ -29,7 +29,7 @@ makeRequest = () => {
 
 createCard = (response) => {
     const section = document.querySelector('section');
-        // Get choice of bear from sessionStorage
+        // Get choice of bear from localStorage
         let choiceName        = response.name;
         let choiceDescription = response.description;
         let choicePrice       = response.price;
@@ -76,15 +76,13 @@ createCard = (response) => {
                 newColorButton.textContent = choiceColor;
 
                 newColorButton.addEventListener('click', () => {
-                    sessionStorage.setItem('choiceColor', choiceColor);
+                    localStorage.setItem('choiceColor', choiceColor);
                     addItem.textContent = 'Add ' + choiceColor + ' ' + choiceName + ' bear to the cart?'
-                    if (sessionStorage.getItem('colorChosen')) {
+                    if (localStorage.getItem('colorChosen')) {
                         addItem.setAttribute('href', 'cart.html');   
                     };
-                    sessionStorage.setItem('colorChosen', '1');
+                    localStorage.setItem('colorChosen', '1');
                     let appendage = '{"name":' + choiceName + '"colors":' + choiceColor + ',"_id":' + choiceId + ',"price":' + choicePrice + '}';
-                    // sessionStorage.setItem('cart', {"colors":["Tan","Chocolate","Black","White"],"_id":"5be9c8541c9d440000665243","name":"Norbert"       ,"price":2900,
-
                 });
 
                 btnColors.appendChild(newColorButton);

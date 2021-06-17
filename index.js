@@ -41,12 +41,12 @@ createCard = (response) => {
         newBtn.innerHTML += '<p>' + response[i].description + '</p>';
         newBtn.innerHTML += '<p>$' + response[i].price / 100 + '</p>';
 
-        // Save data to sessionStorage, but image will need to be accessed in item.js
+        // Save data to localStorage, but image will need to be accessed in item.js
         newBtn.addEventListener('click', () => {
-            sessionStorage.setItem('choice', i);
-            sessionStorage.setItem('choiceName' , response[i].name);
-            sessionStorage.setItem('choicePrice', response[i].price);
-            sessionStorage.setItem('choiceId'   , response[i]._id);
+            localStorage.setItem('choice', i);
+            localStorage.setItem('choiceName' , response[i].name);
+            localStorage.setItem('choicePrice', response[i].price);
+            localStorage.setItem('choiceId'   , response[i]._id);
         });
 
         // Make card clickable and append card elements
