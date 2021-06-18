@@ -1,3 +1,13 @@
+Eric Rudy - Web Developer Path - OpenClassrooms
+Started about 4/1/2021
+Presentables:
+1) Github repo at:
+https://github.com/earjcr/OrinocoFlow
+2) OrinocoTestPlan Word Document
+
+
+What appears below was from the original README.md file
+
 # Orinoco #
 
 This is the back end server for Project 5 of the Junior Web Developer path.
